@@ -67,7 +67,7 @@ var freq = childSnapshot.val().frequency;
     console.log(freq);
 
 // prettify the next arrival time
-var trainTimePretty = moment.unix(trainTime).format('LT');
+var trainTime = moment.unix(trainTime).format('LT');
 
 // calculate minutes away
 
