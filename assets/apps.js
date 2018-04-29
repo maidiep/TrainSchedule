@@ -48,3 +48,30 @@ $("#trainTimeInput").val("");
 $("#frequencyInput").val("");
 
 });
+
+// firebase event for adding train schedule after user input
+database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+    console.log(childSnapshot.val());
+
+//stores everything into a variable
+var trainName = childSnapshot.val().name;
+var destination = childSnapshot.val().destination;
+var trainTime = childSnapshot.val().time;
+var freq = childSnapshot.val().frequency;
+
+
+// train information
+    console.log(trainName);
+    console.log(destination);
+    console.log(trainTime);
+    console.log(freq);
+
+// prettify the next arrival time
+var trainTimePretty = moment.unix(trainTime).format('LT');
+
+// calculate minutes away
+
+// add train data to schedule table
+$("#train-table > tbody").append("<tr><td>" + trainName + "<td><td>" + destination + "<td><td>" + trainTime + "<td><td>" + freq + "<td><td>" );
+
+});
