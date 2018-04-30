@@ -99,6 +99,6 @@ console.log(moment.unix(trainTime).format("HH:mm"));
 
 
     // add train data to schedule table
-$("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + freq + "</td><td>" + trainTime + "</td><td>" + nextTrain + "</td><td>" + tMinutesTillTrain + "</td></tr>");
+$("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + freq + "</td><td>" + trainTime + "</td><td>" + tMinutesTillTrain + "</td></tr>");
 
 });
