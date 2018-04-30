@@ -66,12 +66,39 @@ var freq = childSnapshot.val().frequency;
     console.log(trainTime);
     console.log(freq);
 
-// prettify the next arrival time
-var trainTime = moment.unix(trainTime).format('LT');
 
-// calculate minutes away
+// calculate 
+var trainTimePretty = moment.unix(trainTime).format("HH:mm");
+console.log(moment.unix(trainTime));
+console.log(moment.unix(trainTime).format("HH:mm"));
 
-// add train data to schedule table
-$("#train-table > tbody").append("<tr><td>" + trainName + "<td><td>" + destination + "<td><td>" + trainTime + "<td><td>" + freq + "<td><td>" );
+
+    // First Train (pushed back 1 year to make sure it comes before current time)
+    var trainTimeConverted = moment(trainTime, "HH:mm").subtract(1, "years");
+    console.log(trainTimeConverted);
+
+    // Current Time
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+    // Difference between the times
+    var diffTime = currentTime.diff(trainTimeConverted, "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
+
+    // Time apart (remainder)
+    var tRemainder = diffTime % freq;
+    console.log(tRemainder);
+
+    // Minute Until Train
+    var tMinutesTillTrain = freq - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+    // Next Train
+    var nextTrain = currentTime.add(tMinutesTillTrain, "minutes").format("hh:mm");
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
+
+    // add train data to schedule table
+$("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + freq + "</td><td>" + trainTime + "</td><td>" + nextTrain + "</td><td>" + tMinutesTillTrain + "</td></tr>");
 
 });
